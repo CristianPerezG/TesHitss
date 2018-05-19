@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      >
+    <h:head>
+        <title>Pagina de Logueo</title>        
+    </h:head>
+    <h:body>
+        <b:navBar brand="TestHitss" brandHref="#" fixed="top" inverse="true">    
+            <h:form styleClass="navbar-form navbar-right">
+                <h:panelGroup layout="block" class="form-group">
+                    <b:inputText placeholder="Usuario" fieldSize="md" value="#{loginBean.nombreUsuario}"/>                    
+                </h:panelGroup>                
+                <h:panelGroup layout="block" class="form-group">
+                    <b:inputText placeholder="Password" fieldSize="sm" value="#{loginBean.passUsuario}"/>
+                </h:panelGroup>
+                <b:commandButton action="#{loginBean.loginUsuario()}" value="Login" look="success" icon="chevron-right" iconAlign="right"/>
+            </h:form>
+        </b:navBar> 
+         <h:outputText value="&#60;br&#62;&#60;/br&#62;" escape="false"></h:outputText>
+         <h:outputText value="&#60;br&#62;&#60;/br&#62;" escape="false"></h:outputText>
+        <b:container> 
+            <b:alert severity="danger" title="Sin Logueo" closable="true" rendered="#{loginBean.hayAlerta() and loginBean.mensajeLogin != 'Usuario Deslogueado'}">#{loginBean.mensajeLogin}</b:alert>
+            <b:alert severity="success" title="Usuario Deslogueado" closable="true" rendered="#{loginBean.hayAlerta() and loginBean.mensajeLogin == 'Usuario Deslogueado'}">#{loginBean.mensajeLogin}</b:alert>
+        </b:container>
+        <b:jumbotron>           
+            <b:container>          
+                <h:outputText value="&#60;h1&#62;Prueba de Conocimiento EAR!&#60;/h1&#62;" escape="false"></h:outputText>
+                <b:row>
+                    <b:image small-screen="one-third" value="img/javaLogo.png" style="width: 33%; height: 25em;"></b:image>
+                    <b:image small-screen="one-third" value="img/javaee.png" style="width: 33%; height: 23em;"></b:image>
+                    <b:image small-screen="one-third" value="img/glassfish.png" style="width: 33%; height: 25em;"></b:image>                 
+                </b:row> 
+                <b:row>
+                    <h:outputText value="&#60;p&#62;Este es el proyecto para prueba de conocimiento para el cargo de Desarrollador Java.&#60;/p&#62;" escape="false"></h:outputText>    
+                </b:row>
+            </b:container>
+        </b:jumbotron>
+        <b:container> 
+            <h:outputText value="&#60;hr/&#62;
+                          &#60;footer&#62;
+                          &#60;p&#62;© Cristian Perez 2018&#60;/p&#62;
+                          &#60;/footer&#62;" escape="false"></h:outputText>           
+        </b:container>       
+    </h:body>
+</html>
+
+
+

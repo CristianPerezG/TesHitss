@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Administración de Usuarios</title>
+    </h:head>
+    <h:body>
+        <b:navBar brand="TestHitss" brandHref="#" fixed="top" inverse="true">    
+            <h:form styleClass="navbar-form navbar-left">                
+                <b:commandButton action="#{loginBean.irHome()}" value="Home" look="link" icon="home" iconAlign="right">
+                    <f:param name="nombreUsuario" value="#{usuariosBean.usuarioLogeado}" />
+                </b:commandButton>
+                <b:commandButton action="#{loginBean.irAdminUsuarios()}" value="Administración de Usuarios" look="link" icon="cog" icon-spin="true" iconAlign="right">
+                    <f:param name="nombreUsuario" value="#{usuariosBean.usuarioLogeado}" />
+                </b:commandButton>
+            </h:form>
+            <h:form styleClass="navbar-form navbar-right">                
+                <b:commandButton action="#{loginBean.logoutUsuario()}" value="Logout(#{usuariosBean.usuarioLogeado})" look="success" icon="chevron-right" iconAlign="right">
+                    <f:param name="nombreUsuario" value="#{usuariosBean.usuarioLogeado}" />
+                </b:commandButton>
+            </h:form>
+        </b:navBar>   
+        <h:outputText value="&#60;br&#62;&#60;/br&#62;" escape="false"></h:outputText>
+        <h:outputText value="&#60;br&#62;&#60;/br&#62;" escape="false"></h:outputText>       
+        <b:container fluid="true"> 
+            <b:row>
+                <b:column span="10">
+                    <b:form>                
+                        <b:dataTable value = "#{usuariosBean.listadoUsuarios}" var = "usuarios" >
+                            <b:dataTableColumn value="#{usuarios.nombreusuario}" />
+                            <b:dataTableColumn value="#{usuarios.descripcionusuario}" />
+                            <b:dataTableColumn value="#{usuarios.fechacreacion}" />
+                            <b:dataTableColumn value="#{usuarios.isLogin()}" label="Logeado" />                    
+                            <b:dataTableColumn label="Editar" >
+                                <b:commandButton value="Modificar Usuario" action="#{usuariosBean.editarUsuario(usuarios.idusuario, usuarios.nombreusuario, usuarios.passusuario, usuarios.descripcionusuario, usuarios.fechacreacion, usuarios.isLogin())}" look="info" icon="edit" iconAlign="left"/>
+                            </b:dataTableColumn>     
+                            <b:dataTableColumn label="Eliminar" >
+                                <b:commandButton value = "Eliminar Usuario" action = "#{usuariosBean.eliminarUsuario(usuarios.idusuario)}" look="danger" icon="trash-alt" iconAlign="left"/>
+                            </b:dataTableColumn>    
+                        </b:dataTable>                 
+                        <h:outputText value = "#{usuariosBean.mensajeEliminacion}" />
+                    </b:form>
+                </b:column>
+                <b:column span="2">
+                    <h3>Modificar Usuario</h3>
+                    <hr/> 
+                    <b:form horizontal="true">
+                        <h:inputHidden id="idUsuario" value="#{usuariosBean.idUsuarioE}" />
+                        <h:outputText value = "Usuario: " />
+                        <b:inputText size = "50" value = "#{usuariosBean.nombreUsuarioE}" />
+                        <h:outputText value = "Password: " />
+                        <b:inputSecret size = "100" value = "#{usuariosBean.passUsuarioE}" />
+                        <h:outputText value = "Descripción: " />
+                        <b:inputText size = "100" value = "#{usuariosBean.descipcionUsuarioE}" />
+                        <h:outputText value = "Logueado: " />
+                        <b:inputText size = "3" value = "#{usuariosBean.estaLogeadoE}" />
+                        <b:commandButton value = "Actualizar Usuario" action = "#{usuariosBean.modificarUsuario()}" look="info" icon="user-edit" iconAlign="left"/>
+                        <h:outputText value = "#{usuariosBean.mensajeModificacion}" />
+                    </b:form>
+                </b:column>
+            </b:row>
+            <b:row>
+                <b:column span="6">
+                    <h3>Agregar Usuario</h3>
+                    <hr/>
+                    <b:form horizontal="true">
+                        <h:outputText value = "Usuario: " />
+                        <b:inputText size="10" value="#{usuariosBean.nombreUsuario}" /> 
+                        <h:outputText value = "Password: " />
+                        <b:inputSecret value="#{usuariosBean.passUsuario}" />
+                        <h:outputText value = "Descripción: " />
+                        <b:inputText size="10" value="#{usuariosBean.descipcionUsuario}" />
+                        <b:commandButton value="Agregar Usuario" action="#{usuariosBean.crearUsuario()}" look="success" icon="creative-commons-by" iconAlign="left" />
+                        <h:outputText value="#{usuariosBean.mensajeCreacion}" />
+                    </b:form>    
+                </b:column>
+            </b:row>
+        </b:container>        
+        <b:container> 
+            <h:outputText value="&#60;hr/&#62;
+                          &#60;footer&#62;
+                          &#60;p&#62;© Cristian Perez 2018&#60;/p&#62;
+                          &#60;/footer&#62;" escape="false"></h:outputText>           
+        </b:container>  
+
+    </h:body>
+</html>
+
